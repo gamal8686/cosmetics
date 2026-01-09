@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/components/app_button.dart';
 import '../../core/components/app_image.dart';
 import '../../core/logic/helper_methods.dart';
-import '../home/views.dart';
+import '../home/home_view.dart';
 import 'login.dart';
 
 class AccountActivatedDialog extends StatelessWidget {

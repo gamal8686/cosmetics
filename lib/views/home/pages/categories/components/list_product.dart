@@ -8,14 +8,16 @@ class _ListProduct extends StatefulWidget {
 }
 
 class _ListProductState extends State<_ListProduct> {
-  List<ProductModel>? categories;
+  List<Model>? list;
 
   Future<void> getData() async {
+
+
     final resp = await Dio().get(
       'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/categories.json',
     );
-     categories = ProductList.jsonData(resp.data).list;
-     print(categories!.length);
+    list = ProductList.jsonData(resp.data).list;
+     print(list!.length);
     setState(() {});
   }
 
@@ -27,34 +29,34 @@ class _ListProductState extends State<_ListProduct> {
 
   @override
   Widget build(BuildContext context) {
-    return categories == null
+    return list == null
         ? Center(child: CircularProgressIndicator())
         : Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) =>
-                  _Item(categories: categories![index]),
+                  _Item(model: list![index]),
 
               separatorBuilder: (context, index) => Divider(),
 
-              itemCount: categories!.length,
+              itemCount: list!.length,
             ),
           );
   }
 }
 
 class _Item extends StatelessWidget {
-  final ProductModel categories;
+  final Model model;
 
-  const _Item({super.key, required this.categories});
+  const _Item({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        AppImage(path: categories.image, height: 70.h, width: 70.w),
+        AppImage(path: model.image, height: 70.h, width: 70.w),
         SizedBox(width: 12.w),
         Text(
-          categories.name,
+          model.name,
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
@@ -74,19 +76,22 @@ class _Item extends StatelessWidget {
 }
 
 class ProductList {
-  late final List<ProductModel> list;
+  late final List<Model> list;
 
   ProductList.jsonData(List<dynamic> jsonData) {
-    list = jsonData.map((e) => ProductModel.json(e)).toList();
+    list = jsonData.map((e) => Model.json(e)).toList();
   }
 }
 
-class ProductModel {
-  late final num id;
-  late final String image;
-  late final String name;
 
-  ProductModel.json(Map<String, dynamic> json) {
+
+
+class Model {
+  late final num id;
+  late final String image,name;
+
+
+  Model.json(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     image = json['image'] ?? '';
     name = json['name'] ?? '';

@@ -56,7 +56,7 @@ class ProfilePage extends StatelessWidget {
 
             padding: EdgeInsets.symmetric(vertical: 250.h, horizontal: 10.w),
             itemBuilder: (context, index) => _Item(index: index),
-            itemCount: _model.length,
+            itemCount: _list.length,
           ),
           SizedBox(height: 34.h),
           Positioned(
@@ -103,10 +103,10 @@ class _Item extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: Row(
         children: [
-          _model[index].label,
+          _list[index].label,
           SizedBox(width: 3.w),
           Text(
-            _model[index].labels,
+            _list[index].labels,
             style: TextStyle(
               fontSize: 13.sp,
               fontWeight: FontWeight.w600,
@@ -128,7 +128,7 @@ class CardProfile {
   CardProfile(this.label, this.labels);
 }
 
-final _model = [
+final _list = [
 
   CardProfile(AppImage(path: 'edit_info.svg'), 'Edit Info'),
   CardProfile(AppImage(path: 'order-history.svg'), 'Order History'),

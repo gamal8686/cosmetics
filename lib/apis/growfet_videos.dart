@@ -1,8 +1,7 @@
-import 'package:cosmetics/core/components/app_image.dart';
+import 'package:cosmetics/core/logic/dio_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GrowfetVideosView extends StatefulWidget {
   const GrowfetVideosView({super.key});

@@ -130,6 +130,7 @@ class _AppImageState extends State<AppImage>
             'assets/lottie/${widget.path}',
             height: widget.height,
             width: widget.width,
+
             controller: _controller,
             errorBuilder: (context, error, stackTrace) => Shimmer.fromColors(
               baseColor: Colors.red,

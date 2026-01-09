@@ -1,7 +1,5 @@
 import 'package:cosmetics/core/logic/dio_helper.dart';
 import 'package:cosmetics/core/logic/helper_methods.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -8,14 +8,14 @@ class _Offers extends StatefulWidget {
 }
 
 class _OffersState extends State<_Offers> {
-  List<OffersModel>? offers;
+  List<Model>? list;
 
   Future<void> getData() async {
     final resp = await Dio().get(
       'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/offers.json',
     );
 
-    offers = OfferList.jsonData(resp.data).list;
+    list = OfferList.jsonData(resp.data).list;
 
     setState(() {});
   }
@@ -28,16 +28,16 @@ class _OffersState extends State<_Offers> {
 
   @override
   Widget build(BuildContext context) {
-    return offers == null
+    return list == null
         ? Center(child: CircularProgressIndicator())
         : CarouselSlider.builder(
-            itemCount: offers!.length,
+            itemCount: list!.length,
 
             itemBuilder: (context, index, realIndex) => Stack(
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  offers![index].image,
+                  list![index].image,
                   fit: BoxFit.cover,
                   height: 320.h,
                   width: double.infinity,
@@ -58,7 +58,7 @@ class _OffersState extends State<_Offers> {
                         children: [
                           Expanded(
                             child: Text(
-                              '${offers![index].discount} % OFF DISCOUNT\nCUPON CODE : ${offers![index].coupon}',
+                              '${list![index].discount} % OFF DISCOUNT\nCUPON CODE : ${list![index].coupon}',
                               style: TextStyle(
                                 color: Color(0xff62322D),
                                 fontSize: 16.sp,
@@ -90,7 +90,7 @@ class _OffersState extends State<_Offers> {
                           Spacer(),
                           Expanded(
                             child: Text(
-                              '${offers![index].subtitle1}\nCUPON CODE : ${offers![index].subtitle2}',
+                              '${list![index].subtitle1}\nCUPON CODE : ${list![index].subtitle2}',
                               style: TextStyle(
                                 color: Color(0xff434C6D),
                                 fontSize: 12.sp,
@@ -116,14 +116,14 @@ class _OffersState extends State<_Offers> {
 }
 
 class OfferList {
-  late final List<OffersModel> list;
+  late final List<Model> list;
 
   OfferList.jsonData(List<dynamic> jsonList) {
-    list = jsonList.map((e) => OffersModel.fromJson(e)).toList();
+    list = jsonList.map((e) => Model.fromJson(e)).toList();
   }
 }
 
-class OffersModel {
+class Model {
   late final String coupon;
   late final num discount;
   late final num id;
@@ -132,7 +132,7 @@ class OffersModel {
   late final String subtitle1;
   late final String subtitle2;
 
-  OffersModel.fromJson(Map<String, dynamic> json) {
+  Model.fromJson(Map<String, dynamic> json) {
     coupon = json['cupon'] ?? '';
     discount = json['discound'] ?? 0;
     id = json['id'] ?? 0;

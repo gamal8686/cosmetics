@@ -1,4 +1,7 @@
-import 'package:cosmetics/views/auth/login.dart';
+
+import 'package:cosmetics/views/home/home_view.dart';
+import 'package:cosmetics/views/home/pages/categories/view.dart';
+import 'package:cosmetics/views/home/pages/home/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,15 +21,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final primary = Color(0xff8E8EA9);
     final primarySwatch = MaterialColor(primary.value, {
-      50: primary.withOpacity(.1),
-      100: primary.withOpacity(.2),
-      200: primary.withOpacity(.3),
-      300: primary.withOpacity(.4),
-      400: primary.withOpacity(.5),
+      50: primary.withValues(alpha: .1),
+      100: primary.withValues(alpha: .2),
+      200: primary.withValues(alpha: .3),
+      300: primary.withValues(alpha: .4),
+      400: primary.withValues(alpha: .5),
       500: primary,
-      600: primary.withOpacity(.7),
-      700: primary.withOpacity(.8),
-      800: primary.withOpacity(.9),
+      600: primary.withValues(alpha: .6),
+      700: primary.withValues(alpha: .7),
+      800: primary.withValues(alpha: .8),
       900: primary,
     });
     return ScreenUtilInit(
@@ -75,7 +78,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         title: 'Cosmetics',
-        home: LoginView(),
+        home:const HomeView(),
       ),
     );
   }

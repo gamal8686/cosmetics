@@ -10,14 +10,14 @@ class _List extends StatefulWidget {
 }
 
 class _ListState extends State<_List> {
-  List<ProductModel>? listProdect;
+  List<ProductModel>? list;
 
   Future<void> getData() async {
     final resp = await Dio().get(
       'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/products/${widget.isTopRated ? 'most_ordered.json' : 'top_rated.json'}',
     );
 
-    listProdect = ProductList.jsonData(resp.data).list;
+    list = ProductList.jsonData(resp.data).list;
     setState(() {});
   }
 
@@ -43,10 +43,10 @@ class _ListState extends State<_List> {
           ),
         ),
         SizedBox(height: 14.h),
-        listProdect == null
+        list == null
             ? Center(child: CircularProgressIndicator())
             : GridView.builder(
-                itemCount: listProdect!.length,
+                itemCount: list!.length,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -56,18 +56,17 @@ class _ListState extends State<_List> {
                   mainAxisSpacing: 12,
                 ),
 
-                itemBuilder: (context, index) =>
-                    _Items(Product: listProdect![index]),
+                itemBuilder: (context, index) => _Item(model: list![index]),
               ),
       ],
     );
   }
 }
 
-class _Items extends StatelessWidget {
-  final ProductModel? Product;
+class _Item extends StatelessWidget {
+  final ProductModel model;
 
-  const _Items({super.key, this.Product});
+  const _Item({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -92,33 +91,16 @@ class _Items extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Product!.image == null && Product!.image.isNotEmpty
-                    ? Center(child: CircularProgressIndicator())
-                    : Container(
-                        height: 150.h,
-                        width: double.infinity,
-                        color: Colors.grey[300],
-                        child: Product!.image.isNotEmpty
-                            ? AppImage(
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                path: Product!.image,
-                              )
-                            : Shimmer.fromColors(
-                                baseColor: Colors.red,
-                                highlightColor: Colors.yellow,
-                                child: Center(
-                                  child: Text(
-                                    '404',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 40.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                      ),
+                Container(
+                  height: 150.h,
+                  width: double.infinity,
+                  color: Colors.grey[300],
+                  child: AppImage(
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    path: model.image,
+                  ),
+                ),
                 GestureDetector(
                   onTap: () {},
                   child: Container(
@@ -144,7 +126,7 @@ class _Items extends StatelessWidget {
             SizedBox(height: 11.h),
             Expanded(
               child: Text(
-                Product!.titel,
+                model.titel,
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 14.sp,
@@ -155,7 +137,7 @@ class _Items extends StatelessWidget {
             SizedBox(height: 11.h),
             Expanded(
               child: Text(
-                '${Product!.price}',
+                '${model.price}',
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,
@@ -180,8 +162,7 @@ class ProductList {
 
 class ProductModel {
   late final num id, price;
-  late final String image;
-  late String titel;
+  late final String image, titel;
 
   ProductModel.json(Map<String, dynamic> json) {
     id = json['id'] ?? 0;

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static const _baseUrl = 'https://growfet.com';
+  static const _baseUrl = 'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/';
   static final _dio = Dio(
     BaseOptions(
       baseUrl: _baseUrl,
