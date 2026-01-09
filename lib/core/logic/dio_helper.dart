@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static const _baseUrl = 'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/';
+  static const _baseUrl = 'http://www.cosmatics.growfet.com';
   static final _dio = Dio(
     BaseOptions(
       baseUrl: _baseUrl,
@@ -43,7 +43,7 @@ class DioHelper {
     } on DioException catch (ex) {
       return CustomResponse(
         isSuccess: false,
-        mag: ex.response!.data['message'],
+        mag: ex.response?.data['message'],
       );
     }
   }

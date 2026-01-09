@@ -9,6 +9,7 @@ import '../../core/components/app_input.dart';
 
 import '../../core/components/app_login_or_register.dart';
 import '../../core/components/app_validator.dart';
+import '../home/home_view.dart';
 import 'forget _password.dart';
 
 class LoginView extends StatefulWidget {
@@ -21,11 +22,11 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   String? onSelectCountryCode;
 
-  TextEditingController phoneController = TextEditingController();
+  final phoneController = TextEditingController();
 
-  TextEditingController passwordController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   Future<void> sendData() async {
     final phone = phoneController.text.trim();
@@ -36,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
       data: {
         "countryCode": onSelectCountryCode,
         "phoneNumber": phone,
-        "password": passwored,
+        "password": passwored
       },
     );
     if (resp.isSuccess) {
@@ -130,7 +131,7 @@ class _LoginViewState extends State<LoginView> {
                         sendData();
 
 
-                        //goTo(HomeView(), canPop: false);
+                        goTo(HomeView(), canPop: false);
                       }
                     },
                   ),
