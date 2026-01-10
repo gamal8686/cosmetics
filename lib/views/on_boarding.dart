@@ -14,20 +14,20 @@ class OnBoardingView extends StatefulWidget {
 }
 
 class OnBoardingViewState extends State<OnBoardingView> {
-  final List = [
-    _model(
+  final list = [
+    Model(
       image: 'on_boarding1.png',
       titel: 'WELCOME',
       desc:
           'Makeup has the power to transform your mood and empowers you to be a more confident person.',
     ),
-    _model(
+    Model(
       image: 'on_boarding2.png',
       titel: 'SEARCH & PICK',
       desc:
           'We have dedicated set of products and routines hand picked for every skin type.',
     ),
-    _model(
+    Model(
       image: 'on_boarding3.png',
       titel: 'PUCH NOTIFICATIONS',
       desc: 'Allow notifications for new makeup & cosmetics offers.',
@@ -66,16 +66,16 @@ CashHelper.setIsNotFirst();
                     ),
                   ),
                 ),
-              AppImage(path: List[counterIndex].image),
+              AppImage(path: list[counterIndex].image),
               SizedBox(height: 25.h),
               Text(
-                List[counterIndex].titel,
+                list[counterIndex].titel,
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w900),
               ),
               SizedBox(height: 25.h),
 
               Text(
-                List[counterIndex].desc,
+                list[counterIndex].desc,
                 style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.center,
               ),
@@ -112,8 +112,8 @@ CashHelper.setIsNotFirst();
   }
 }
 
-class _model {
+class Model {
   final String image, titel, desc;
 
-  _model({required this.image, required this.titel, required this.desc});
+  Model({required this.image, required this.titel, required this.desc});
 }

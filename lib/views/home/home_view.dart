@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       body: pages[currentIndex].page,
       extendBody: true,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     bottomNavigationBar: Container(
         clipBehavior: Clip.antiAlias,
         margin: EdgeInsets.symmetric(horizontal: 13.h,vertical: 20.w),

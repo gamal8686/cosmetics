@@ -8,11 +8,9 @@ class InputValidator {
 
   // RegExp if need regex if not need not problem
   static String? phoneValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null ) {
       return 'Field is empty';
-    } else if (value.length > 5) {
-      return 'Phone number must be at least 10 digits';
-    }
+    } 
 
     return null;
   }

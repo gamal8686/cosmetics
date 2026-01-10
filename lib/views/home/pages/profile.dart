@@ -131,7 +131,7 @@ class CardProfile {
 final _list = [
 
   CardProfile(AppImage(path: 'edit_info.svg'), 'Edit Info'),
-  CardProfile(AppImage(path: 'order-history.svg'), 'Order History'),
+  CardProfile(AppImage(path: 'order_history.svg'), 'Order History'),
   CardProfile(AppImage(path: 'wallet.svg'), 'Wallet'),
   CardProfile(AppImage(path: 'setting.svg'), 'Settings'),
   CardProfile(AppImage(path: 'discount.svg'),'Voucher'),
