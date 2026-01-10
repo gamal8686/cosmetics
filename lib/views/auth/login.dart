@@ -26,18 +26,18 @@ class _LoginViewState extends State<LoginView> {
 
   final passwordController = TextEditingController();
 
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   Future<void> sendData() async {
     final phone = phoneController.text.trim();
-    final passwored = passwordController.text.trim();
+    final password = passwordController.text.trim();
 
     final resp = await DioHelper.sendData(
       pass: '/api/Auth/login',
       data: {
         "countryCode": onSelectCountryCode,
         "phoneNumber": phone,
-        "password": passwored
+        "password": password
       },
     );
     if (resp.isSuccess) {
@@ -52,7 +52,7 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       body: SafeArea(
         child: Form(
-          key: formKey,
+          key: _formKey,
           child: SingleChildScrollView(
             padding: EdgeInsets.all(13.r).copyWith(top: 48.r),
             child: Column(
@@ -127,7 +127,7 @@ class _LoginViewState extends State<LoginView> {
                     width: 268.w,
                     text: 'Login',
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         sendData();
 
 

@@ -92,7 +92,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   width: 270.w,
                   onPressed: () {
                     if(formKey.currentState!.validate())
-                    sentData();
+                  {  sentData();}
                     goTo(VerifyCode(isFromCreateAccount: true), canPop: true);
                   },
                   text: 'Next',

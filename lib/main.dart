@@ -1,5 +1,6 @@
 
 import 'package:cosmetics/views/auth/create_account.dart';
+import 'package:cosmetics/views/auth/create_password.dart';
 import 'package:cosmetics/views/auth/login.dart';
 import 'package:cosmetics/views/home/home_view.dart';
 import 'package:cosmetics/views/home/pages/categories/view.dart';
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         title: 'Cosmetics',
-        home:const CreateAccount(),
+        home:const CreatePasswordView(),
       ),
     );
   }
