@@ -49,16 +49,16 @@ class _GrowfetVideosViewState extends State<GrowfetVideosView> {
               padding: EdgeInsets.all(15),
               scrollDirection: Axis.vertical,
               itemCount: list!.length,
-              itemBuilder: (context, index) => _item(videoFile: list![index]),
+              itemBuilder: (context, index) => _Item(videoFile: list![index]),
             ),
     );
   }
 }
 
-class _item extends StatelessWidget {
+class _Item extends StatelessWidget {
   final VideoModel videoFile;
 
-  const _item({super.key, required this.videoFile});
+  const _Item({super.key, required this.videoFile});
 
   @override
   Widget build(BuildContext context) {

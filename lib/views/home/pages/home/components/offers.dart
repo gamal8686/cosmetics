@@ -12,10 +12,11 @@ class _OffersState extends State<_Offers> {
 
   Future<void> getData() async {
     final resp = await Dio().get(
-      'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/offers.json',
+      'http://www.cosmatics.growfet.com/api/Sliders',
     );
-
-    list = OfferList.jsonData(resp.data).list;
+    //await DioHelper.getData(pass: '/api/Sliders');
+    print(resp.data);
+    list = AutoGenerate.fromList(resp.data).list;
 
     setState(() {});
   }
@@ -37,7 +38,8 @@ class _OffersState extends State<_Offers> {
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  list![index].image,
+                  list![index].imageUrl
+                    ,
                   fit: BoxFit.cover,
                   height: 320.h,
                   width: double.infinity,
@@ -58,7 +60,7 @@ class _OffersState extends State<_Offers> {
                         children: [
                           Expanded(
                             child: Text(
-                              '${list![index].discount} % OFF DISCOUNT\nCUPON CODE : ${list![index].coupon}',
+                              '${list![index].discountPercent} % OFF DISCOUNT\nCUPON CODE : ${list![index].couponCode}',
                               style: TextStyle(
                                 color: Color(0xff62322D),
                                 fontSize: 16.sp,
@@ -90,7 +92,7 @@ class _OffersState extends State<_Offers> {
                           Spacer(),
                           Expanded(
                             child: Text(
-                              '${list![index].subtitle1}\nCUPON CODE : ${list![index].subtitle2}',
+                              '${list![index].descriptionTitle1}\nCUPON CODE : ${list![index].descriptionTitle2}',
                               style: TextStyle(
                                 color: Color(0xff434C6D),
                                 fontSize: 12.sp,
@@ -115,30 +117,27 @@ class _OffersState extends State<_Offers> {
   }
 }
 
-class OfferList {
-  late final List<Model> list;
+class AutoGenerate {
+  final List<Model> list;
 
-  OfferList.jsonData(List<dynamic> jsonList) {
-    list = jsonList.map((e) => Model.fromJson(e)).toList();
-  }
+  AutoGenerate.fromList(List<dynamic> jsonList)
+    : list = jsonList.map((e) => Model.fromJson(e)).toList();
 }
 
 class Model {
-  late final String coupon;
-  late final num discount;
   late final num id;
-  late final String image;
-  late final num productId;
-  late final String subtitle1;
-  late final String subtitle2;
+  late final String couponCode;
+  late final num discountPercent;
+  late final String descriptionTitle1;
+  late final String descriptionTitle2;
+  late final String imageUrl;
 
   Model.fromJson(Map<String, dynamic> json) {
-    coupon = json['cupon'] ?? '';
-    discount = json['discound'] ?? 0;
     id = json['id'] ?? 0;
-    image = json['image'] ?? '';
-    productId = json['product_id'] ?? 0;
-    subtitle1 = json['sub_title1'] ?? '';
-    subtitle2 = json['sub_title2'] ?? '';
+    couponCode = json['couponCode'] ?? '';
+    discountPercent = json['discountPercent'] ?? 0;
+    descriptionTitle1 = json['descriptionTitle1'] ?? '';
+    descriptionTitle2 = json['descriptionTitle2'] ?? '';
+    imageUrl = json['imageUrl'] ?? '';
   }
 }

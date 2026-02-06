@@ -18,17 +18,17 @@ class CreatePasswordView extends StatefulWidget {
 }
 
 class _CreatePasswordViewState extends State<CreatePasswordView> {
-  final _formKey=GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final _newPassword = TextEditingController();
   final _confirmPassword = TextEditingController();
-  Future<void> sendData()async{
-    final resp=await   DioHelper.sendData(
+
+  Future<void> sendData() async {
+    final resp = await DioHelper.sendData(
       pass: '/api/Auth/reset-password',
       data: {
         "newPassword": _newPassword.text.trim(),
-        "confirmPassword": _confirmPassword.text.trim()
-      }
-
+        "confirmPassword": _confirmPassword.text.trim(),
+      },
     );
     if (resp.isSuccess) {
       showMessage(resp.mag);
@@ -50,7 +50,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
               AppImage(path: 'logo.png', height: 65.h, width: 65.w),
               SizedBox(height: 40.h),
               Text(
-                'Create Account',
+                'Create Password',
                 style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w700),
               ),
               SizedBox(height: 50.h),
@@ -80,12 +80,14 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                 child: AppButton(
                   width: 270,
                   onPressed: () {
-                    if(_formKey.currentState!.validate())
-              {      sendData();}
+                    if (_formKey.currentState!.validate()) {
+                      sendData();
+                    }
                     showDialog(
                       context: context,
-                      builder: (context) =>
-                          const AccountActivatedDialog(isFromCreateAccount: true),
+                      builder: (context) => const AccountActivatedDialog(
+                        isFromCreateAccount: true,
+                      ),
                     );
                   },
                   text: 'Confirm',

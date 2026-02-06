@@ -2,13 +2,13 @@
 import 'package:cosmetics/views/auth/create_account.dart';
 import 'package:cosmetics/views/auth/create_password.dart';
 import 'package:cosmetics/views/auth/login.dart';
-import 'package:cosmetics/views/home/home_view.dart';
 import 'package:cosmetics/views/home/pages/categories/view.dart';
 import 'package:cosmetics/views/home/pages/home/view.dart';
-import 'package:cosmetics/views/home/pages/profile.dart';
 import 'package:cosmetics/views/splash.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 import 'core/logic/helper_methods.dart';
 import 'core/logic/shared_preferences.dart';
@@ -83,7 +83,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         title: 'Cosmetics',
-        home:const HomeView(),
+        home:const LoginView ()
+
+
       ),
     );
   }

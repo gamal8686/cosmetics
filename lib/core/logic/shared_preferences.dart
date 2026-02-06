@@ -1,23 +1,21 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class CashHelper {
- static late SharedPreferences preferences;
- static Future<void>init()async{
-    preferences= await SharedPreferences.getInstance();
+  static late SharedPreferences _preferences;
 
+  static Future<void> init() async {
+    _preferences = await SharedPreferences.getInstance();
   }
-static  void setIsNotFirst(){
-    preferences.setBool('isFirst', false);
 
+  static void setIsNotFirst() {
+    _preferences.setBool('isFirst', false);
   }
-static bool get getIsNotFirst{
-    return preferences.getBool('isFirst')??true;
- }
 
+  static bool get getIsNotFirst {
+    return _preferences.getBool('isFirst') ?? true;
+  }
 
-
-
-
-
+  Future<bool> logout() async {
+    return _preferences.clear();
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class DioHelper {
-  static const _baseUrl = 'http://www.cosmatics.growfet.com';
+  static const _baseUrl = 'https://cosmatics.growfet.com';
   static final _dio = Dio(
     BaseOptions(
       baseUrl: _baseUrl,
@@ -12,22 +12,28 @@ class DioHelper {
     ),
   );
 
-  static Future<CustomResponse> getData({String pass = ''}) async {
+  static Future<CustomResponse> getData({String pass =''}) async {
     try {
       final resp = await _dio.get(pass);
+      print(resp.data);
 
-      final data;
+      final Map<String, dynamic>  data;
+
       if (resp.data is List) {
         data = {"list": resp.data};
+
       } else {
         data = resp.data;
       }
 
       return CustomResponse(mag: 'is Success', isSuccess: true, data: data);
+
     } on DioException catch (ex) {
+
       return CustomResponse(
         isSuccess: false,
-        mag: ex.response!.data['message'],
+        mag: ex.response?.data?['message'].toString() ?? ex.message,
+
       );
     }
   }
