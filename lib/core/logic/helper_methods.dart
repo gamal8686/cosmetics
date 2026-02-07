@@ -24,7 +24,7 @@ goTo(Widget page, {bool canPop = false, int? delayDuration}) {
 
 showMessage(String? text, {bool isError = false}) {
   if (text == null || text.isEmpty) return;
-  return ScaffoldMessenger.of(navKey.currentContext!).showSnackBar(
+   ScaffoldMessenger.of(navKey.currentContext!).showSnackBar(
     SnackBar(
       backgroundColor: isError ? Colors.red : Colors.green,
       content: Text(text),

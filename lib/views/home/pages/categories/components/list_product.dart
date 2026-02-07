@@ -17,7 +17,7 @@ class _ListProductState extends State<_ListProduct> {
       'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/categories.json',
     );
     list = ProductList.jsonData(resp.data).list;
-     print(list!.length);
+
     setState(() {});
   }
 

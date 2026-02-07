@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+enum DataState { loading, failed, success }
+
 class DioHelper {
   static const _baseUrl = 'https://cosmatics.growfet.com';
   static final _dio = Dio(
@@ -12,28 +14,23 @@ class DioHelper {
     ),
   );
 
-  static Future<CustomResponse> getData({String pass =''}) async {
+  static Future<CustomResponse> getData({String pass = ''}) async {
     try {
       final resp = await _dio.get(pass);
-      print(resp.data);
 
-      final Map<String, dynamic>  data;
+      final Map<String, dynamic> data;
 
       if (resp.data is List) {
         data = {"list": resp.data};
-
       } else {
         data = resp.data;
       }
 
-      return CustomResponse(mag: 'is Success', isSuccess: true, data: data);
-
+      return CustomResponse(mag:'is dddddd', isSuccess: true, data: data);
     } on DioException catch (ex) {
-
       return CustomResponse(
         isSuccess: false,
         mag: ex.response?.data?['message'].toString() ?? ex.message,
-
       );
     }
   }
@@ -44,8 +41,12 @@ class DioHelper {
   }) async {
     try {
       final resp = await _dio.post(pass, data: data);
-      print(resp.data);
-      return CustomResponse(isSuccess: true, mag: 'is Success');
+
+      return CustomResponse(
+        isSuccess: true,
+        mag: 'Is Success',
+        data: resp.data is Map<String, dynamic> ? resp.data : null,
+      );
     } on DioException catch (ex) {
       return CustomResponse(
         isSuccess: false,

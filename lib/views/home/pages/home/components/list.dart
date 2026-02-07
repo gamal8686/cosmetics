@@ -16,7 +16,6 @@ class _ListState extends State<_List> {
     final resp = await Dio().get(
       'https://cosmatics-302b5-default-rtdb.europe-west1.firebasedatabase.app/products/${widget.isTopRated ? 'most_ordered.json' : 'top_rated.json'}',
     );
-
     list = ProductList.jsonData(resp.data).list;
     setState(() {});
   }

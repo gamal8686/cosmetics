@@ -1,5 +1,7 @@
 part of '../view.dart';
 
+enum DataState { loading, failed, error }
+
 class _Offers extends StatefulWidget {
   const _Offers({super.key});
 
@@ -9,14 +11,14 @@ class _Offers extends StatefulWidget {
 
 class _OffersState extends State<_Offers> {
   List<Model>? list;
+  DataState state = DataState.loading;
 
   Future<void> getData() async {
-    final resp = await Dio().get(
-      'http://www.cosmatics.growfet.com/api/Sliders',
-    );
-    //await DioHelper.getData(pass: '/api/Sliders');
-    print(resp.data);
-    list = AutoGenerate.fromList(resp.data).list;
+    state = DataState.loading;
+    final resp = await DioHelper.getData(pass: '/api/Sliders');
+    state = DataState.failed;
+    list = ListOffer.fromList(resp.data?['list']).list;
+    state = DataState.error;
 
     setState(() {});
   }
@@ -29,7 +31,9 @@ class _OffersState extends State<_Offers> {
 
   @override
   Widget build(BuildContext context) {
-    return list == null
+    return state == DataState.failed
+        ? IconButton(onPressed: getData, icon: Icon(Icons.replay))
+        : List == null
         ? Center(child: CircularProgressIndicator())
         : CarouselSlider.builder(
             itemCount: list!.length,
@@ -38,8 +42,7 @@ class _OffersState extends State<_Offers> {
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  list![index].imageUrl
-                    ,
+                  list![index].imageUrl,
                   fit: BoxFit.cover,
                   height: 320.h,
                   width: double.infinity,
@@ -117,10 +120,10 @@ class _OffersState extends State<_Offers> {
   }
 }
 
-class AutoGenerate {
+class ListOffer {
   final List<Model> list;
 
-  AutoGenerate.fromList(List<dynamic> jsonList)
+  ListOffer.fromList(List<dynamic> jsonList)
     : list = jsonList.map((e) => Model.fromJson(e)).toList();
 }
 

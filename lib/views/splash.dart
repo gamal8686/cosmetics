@@ -2,6 +2,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cosmetics/core/logic/shared_preferences.dart';
 import 'package:cosmetics/views/auth/login.dart';
+import 'package:cosmetics/views/home/home_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +23,7 @@ class _SplashViewsState extends State<SplashViews> {
   void initState() {
     super.initState();
 
-    goTo(CashHelper.getIsNotFirst? OnBoardingView():LoginView(), delayDuration: 3);
+    goTo(CashHelper.getIsNotFirst? OnBoardingView():CashHelper.isAuth?HomeView():LoginView(), delayDuration: 3);
   }
 
   @override

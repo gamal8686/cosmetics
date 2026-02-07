@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         title: 'Cosmetics',
-        home:const LoginView ()
+        home:const SplashViews ()
 
 
       ),

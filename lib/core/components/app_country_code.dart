@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_image.dart';
-enum DataState{loading,failed,success}
+
+
+
 class AppCountryCode extends StatefulWidget {
   final void Function(String) onSelectedCountryCode;
 
@@ -18,22 +20,22 @@ class _AppCountryCodeState extends State<AppCountryCode> {
   late String selectedCountryCode;
   List<CountryModel>? list;
 
-  DataState state=DataState.loading;
+  DataState state = DataState.loading;
 
   Future<void> getData() async {
     final resp = await DioHelper.getData(pass: '/api/Countries');
     if (resp.isSuccess) {
-      state=DataState.loading;
+      state = DataState.loading;
+      await Future.delayed(Duration(seconds: 2));
       list = CountryCode.fromJson(resp.data ?? {}).list;
 
       selectedCountryCode = list!.first.code;
 
-
       widget.onSelectedCountryCode?.call(selectedCountryCode);
-     state=DataState.success;
+      state = DataState.success;
     } else {
       showMessage(resp.mag, isError: true);
-      state=DataState.failed;
+      state = DataState.failed;
     }
 
     setState(() {});
@@ -58,9 +60,10 @@ class _AppCountryCodeState extends State<AppCountryCode> {
           border: Border.all(),
           borderRadius: BorderRadius.circular(8.r),
         ),
-        child:state== DataState.failed
-            ? IconButton(onPressed:getData, icon: Icon(Icons.replay))
-            :state==DataState.loading
+        child: state == DataState.failed
+
+            ? IconButton(onPressed: getData, icon: Icon(Icons.replay))
+            : state == DataState.loading
             ? Center(child: CircularProgressIndicator())
             : DropdownButton(
                 icon: Padding(

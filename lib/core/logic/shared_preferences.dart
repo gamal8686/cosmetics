@@ -1,3 +1,5 @@
+import 'package:cosmetics/views/auth/login.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CashHelper {
@@ -15,7 +17,15 @@ class CashHelper {
     return _preferences.getBool('isFirst') ?? true;
   }
 
-  Future<bool> logout() async {
-    return _preferences.clear();
+  static bool get isAuth {
+    return (_preferences.getString('token') ?? '').isNotEmpty;
+  }
+
+  static Future<void> saveUserData(User model) async {
+    _preferences.setInt('id', model.user.id);
+    _preferences.setString('token', model.token);
+    _preferences.setString('email', model.user.email);
+    _preferences.setString('phoneNumber', model.user.phoneNumber);
+    _preferences.setString('countryCode', model.user.countryCode);
   }
 }
